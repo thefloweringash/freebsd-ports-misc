@@ -15,11 +15,9 @@ BUILD_DEPENDS=	p5-DateTime-Format-Strptime>=0:${PORTSDIR}/devel/p5-DateTime-Form
 		p5-Path-Class>=0.26:${PORTSDIR}/devel/p5-Path-Class
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
-# Upstream has made a commit for v1.13 but has not tagged it. We use
-# the full id of that commit for GH_TAGNAME as a workaround.
 USE_GITHUB=	yes
 GH_ACCOUNT=	s-aska
-GH_TAGNAME=	1c843ed9bb38d386dd897a8004e71ec34bd90fef
+GH_TAGNAME=	${PORTVERSION}
 GH_COMMIT=	1c843ed
 
 PERL_CONFIGURE=	YES

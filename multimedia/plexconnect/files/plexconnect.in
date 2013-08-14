@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# PROVIDE: plexconnect
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="plexconnect"
+rcvar=`set_rcvar`
+
+: ${plexconnect_enable:=NO}
+: ${plexconnect_user:=plexconnect}
+
+plexconnect_logfile=/var/log/PlexConnect.log
+
+pidfile=/var/run/plexconnect.pid
+
+procname="%%PYTHON_CMD%%"
+
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} %%DATADIR%%/PlexConnect.py"
+start_precmd=plexconnect_precmd
+
+plexconnect_precmd() {
+	if [ ! -f "${pidfile}" ]; then
+		install -m 644 -o ${plexconnect_user} /dev/null "${pidfile}"
+	fi
+	if [ ! -f "${plexconnect_logfile}" ]; then
+		install -m 644 -o ${plexconnect_user} /dev/null "${plexconnect_logfile}"
+	fi
+}
+
+load_rc_config $name
+run_rc_command "$1"

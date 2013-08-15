@@ -1,0 +1,13 @@
+libVitaMTP is a library based off of libMTP that does low level USB
+communications with the Vita. It can read and receive MTP commands
+that the Vita sends, which are a proprietary set of commands that
+is based on the MTP open standard.
+
+OpenCMA is a frontend that allows the user to transfer games, saves,
+and media to and from the PlayStation Vita. It makes use of libVitaMTP
+to communicate with the device and other libraries to interpret the
+data sent and received. OpenCMA is a command line tool that aims
+to be an open source replacement to Sony's official Content Management
+Assistant.
+
+WWW: https://github.com/yifanlu/VitaMTP

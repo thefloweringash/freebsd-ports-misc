@@ -1,0 +1,7 @@
+lib/libvitamtp.la
+lib/libvitamtp.a
+lib/libvitamtp.so.2
+lib/libvitamtp.so
+include/vitamtp.h
+libdata/pkgconfig/libvitamtp.pc
+bin/opencma

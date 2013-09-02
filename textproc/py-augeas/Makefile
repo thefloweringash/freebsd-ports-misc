@@ -2,6 +2,7 @@
 
 PORTNAME=	augeas
 PORTVERSION=	0.4.1
+PORTREVISION=	1
 CATEGORIES=	textproc python
 MASTER_SITES=	https://fedorahosted.org/released/python-augeas/
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -9,6 +10,8 @@ DISTNAME=	python-augeas-${PORTVERSION}
 
 MAINTAINER=	lorne@cons.org.nz
 COMMENT=	Pure python bindings for augeas
+
+LIB_DEPENDS=	augeas:${PORTSDIR}/textproc/augeas
 
 USE_PYTHON=yes
 USE_PYDISTUTILS=yes

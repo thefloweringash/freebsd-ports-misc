@@ -13,66 +13,83 @@
 %%DATADIR%%/XMLConverter.py
 %%DATADIR%%/PlexConnect.py
 %%DATADIR%%/Debug.py
+%%DATADIR%%/Localize.py
 %%DATADIR%%/Settings.cfg
 %%DATADIR%%/ATVSettings.cfg
 %%DATADIR%%/PlexConnect.log
-%%DATADIR%%/assets/templates/Photo_Browser.xml
-%%DATADIR%%/assets/templates/Settings_Movies.xml
-%%DATADIR%%/assets/templates/DirectoryWithPreviewActors.xml
-%%DATADIR%%/assets/templates/EpisodePrePlay.xml
-%%DATADIR%%/assets/templates/Music_Track.xml
-%%DATADIR%%/assets/templates/ByFolder.xml
-%%DATADIR%%/assets/templates/SectionPreview-photo.xml
-%%DATADIR%%/assets/templates/SectionPreview-movie.xml
-%%DATADIR%%/assets/templates/MovieSecondary.xml
-%%DATADIR%%/assets/templates/Season_Coverflow.xml
-%%DATADIR%%/assets/templates/ChannelPrePlay.xml
-%%DATADIR%%/assets/templates/PlayMusic.xml
-%%DATADIR%%/assets/templates/MovieSectionTopLevel.xml
-%%DATADIR%%/assets/templates/MoviePreview.xml
-%%DATADIR%%/assets/templates/PlayVideo.xml
-%%DATADIR%%/assets/templates/ChannelsVideo.xml
-%%DATADIR%%/assets/templates/TV_OnDeck.xml
-%%DATADIR%%/assets/templates/MoviePrePlay.xml
-%%DATADIR%%/assets/templates/TVSectionTopLevel.xml
-%%DATADIR%%/assets/templates/Season_List.xml
-%%DATADIR%%/assets/templates/Episode.xml
-%%DATADIR%%/assets/templates/Settings_TVShows.xml
-%%DATADIR%%/assets/templates/SectionPreview-artist.xml
-%%DATADIR%%/assets/templates/Channels.xml
-%%DATADIR%%/assets/templates/Directory.xml
-%%DATADIR%%/assets/templates/Show_Grid.xml
-%%DATADIR%%/assets/templates/Show_List.xml
-%%DATADIR%%/assets/templates/MovieSection.xml
-%%DATADIR%%/assets/templates/Search_Results.xml
-%%DATADIR%%/assets/templates/DirectoryWithPreview.xml
-%%DATADIR%%/assets/templates/Season.xml
-%%DATADIR%%/assets/templates/TVSection.xml
-%%DATADIR%%/assets/templates/Photo.xml
-%%DATADIR%%/assets/templates/Sections.xml
-%%DATADIR%%/assets/templates/Settings_VideoOSD.xml
-%%DATADIR%%/assets/templates/SectionPreview-show.xml
-%%DATADIR%%/assets/templates/SectionPreview.xml
-%%DATADIR%%/assets/templates/Settings.xml
-%%DATADIR%%/assets/templates/TVSecondary.xml
-%%DATADIR%%/assets/templates/Movie_Grid.xml
-%%DATADIR%%/assets/templates/ByFolderPreview.xml
-%%DATADIR%%/assets/templates/Movie_List.xml
-%%DATADIR%%/assets/js/settings.js
-%%DATADIR%%/assets/js/scrobble.js
-%%DATADIR%%/assets/js/utils.js
-%%DATADIR%%/assets/js/application.js
 %%DATADIR%%/assets/js/selectAudioAndSubs.js
+%%DATADIR%%/assets/js/utils.js
 %%DATADIR%%/assets/js/updateXML.js
 %%DATADIR%%/assets/js/photo.js
-%%DATADIR%%/assets/thumbnails/PhotoFolder_Credits.txt
-%%DATADIR%%/assets/thumbnails/PhotoFolder.png
+%%DATADIR%%/assets/js/application.js
+%%DATADIR%%/assets/js/settings.js
+%%DATADIR%%/assets/js/scrobble.js
 %%DATADIR%%/assets/thumbnails/PlexConnectLogo.jpg
-%%DATADIR%%/assets/plexconnect.xml
-%%DATADIR%%/assets/search.xml
-%%DATADIR%%/assets/versionError.xml
-@dirrm %%DATADIR%%/assets/templates
+%%DATADIR%%/assets/thumbnails/Folder.png
+%%DATADIR%%/assets/locales/nb/plexconnect.po
+%%DATADIR%%/assets/locales/nb/plexconnect.mo
+%%DATADIR%%/assets/locales/zh_TW/plexconnect.po
+%%DATADIR%%/assets/locales/zh_TW/plexconnect.mo
+%%DATADIR%%/assets/locales/plexconnect.pot
+%%DATADIR%%/assets/locales/en/plexconnect.mo
+%%DATADIR%%/assets/locales/en/plexconnect.po
+%%DATADIR%%/assets/locales/de/plexconnect.po
+%%DATADIR%%/assets/locales/de/plexconnect.mo
+%%DATADIR%%/assets/locales/locales.txt
+%%DATADIR%%/assets/templates/Search_Results.xml
+%%DATADIR%%/assets/templates/Season_Coverflow.xml
+%%DATADIR%%/assets/templates/Directory.xml
+%%DATADIR%%/assets/templates/SectionPreview-photo.xml
+%%DATADIR%%/assets/templates/SectionPreview-movie.xml
+%%DATADIR%%/assets/templates/SectionPreview-show.xml
+%%DATADIR%%/assets/templates/Movie_Grid.xml
+%%DATADIR%%/assets/templates/Movie_List.xml
+%%DATADIR%%/assets/templates/TVSection.xml
+%%DATADIR%%/assets/templates/Season_List.xml
+%%DATADIR%%/assets/templates/MovieSection.xml
+%%DATADIR%%/assets/templates/Show_Grid.xml
+%%DATADIR%%/assets/templates/Show_List.xml
+%%DATADIR%%/assets/templates/Photo.xml
+%%DATADIR%%/assets/templates/ByFolder.xml
+%%DATADIR%%/assets/templates/VersionError.xml
+%%DATADIR%%/assets/templates/MovieSectionTopLevel.xml
+%%DATADIR%%/assets/templates/SearchForm.xml
+%%DATADIR%%/assets/templates/TVSecondary.xml
+%%DATADIR%%/assets/templates/SectionPreview.xml
+%%DATADIR%%/assets/templates/Show_Bookcase.xml
+%%DATADIR%%/assets/templates/Settings.xml
+%%DATADIR%%/assets/templates/DirectoryWithPreview.xml
+%%DATADIR%%/assets/templates/TVSectionTopLevel.xml
+%%DATADIR%%/assets/templates/DirectoryWithPreviewActors.xml
+%%DATADIR%%/assets/templates/Season.xml
+%%DATADIR%%/assets/templates/ChannelsVideo.xml
+%%DATADIR%%/assets/templates/MovieSecondary.xml
+%%DATADIR%%/assets/templates/Settings_TVShows.xml
+%%DATADIR%%/assets/templates/Settings_Movies.xml
+%%DATADIR%%/assets/templates/SectionPreview-artist.xml
+%%DATADIR%%/assets/templates/Music_Track.xml
+%%DATADIR%%/assets/templates/EpisodePrePlay.xml
+%%DATADIR%%/assets/templates/Channels.xml
+%%DATADIR%%/assets/templates/PlexConnect.xml
+%%DATADIR%%/assets/templates/PlayMusic.xml
+%%DATADIR%%/assets/templates/Settings_VideoOSD.xml
+%%DATADIR%%/assets/templates/Episode.xml
+%%DATADIR%%/assets/templates/TV_OnDeck.xml
+%%DATADIR%%/assets/templates/Photo_Browser.xml
+%%DATADIR%%/assets/templates/MoviePreview.xml
+%%DATADIR%%/assets/templates/ChannelPrePlay.xml
+%%DATADIR%%/assets/templates/MoviePrePlay.xml
+%%DATADIR%%/assets/templates/PlayVideo.xml
+%%DATADIR%%/assets/templates/RefreshLibrary.xml
+%%DATADIR%%/assets/certificates/certificates.txt
 @dirrm %%DATADIR%%/assets/js
 @dirrm %%DATADIR%%/assets/thumbnails
+@dirrm %%DATADIR%%/assets/locales/nb
+@dirrm %%DATADIR%%/assets/locales/zh_TW
+@dirrm %%DATADIR%%/assets/locales/en
+@dirrm %%DATADIR%%/assets/locales/de
+@dirrm %%DATADIR%%/assets/locales
+@dirrm %%DATADIR%%/assets/templates
+@dirrm %%DATADIR%%/assets/certificates
 @dirrm %%DATADIR%%/assets
 @dirrm %%DATADIR%%

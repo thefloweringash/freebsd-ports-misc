@@ -16,6 +16,8 @@ ALL_TARGET=	tzsp2pcap
 
 PLIST_FILES=	bin/tzsp2pcap
 
+NO_STAGE=	yes
+
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/tzsp2pcap ${PREFIX}/bin
 

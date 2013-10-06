@@ -33,6 +33,8 @@ USE_XORG=	x11 xtst xfixes xcomposite xdamage xrandr
 USE_PYDISTUTILS=	yes
 PYDISTUTILS_PKGNAME=	xpra_all
 
+NO_STAGE=	yes
+
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/etc/xpra/Xvfb/xpra.conf ${ETCDIR}/xpra.conf.sample
 	if [ ! -f ${ETCDIR}/xpra.conf ]; then \

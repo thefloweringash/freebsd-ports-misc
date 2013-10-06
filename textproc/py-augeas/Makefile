@@ -21,4 +21,6 @@ PLIST_FILES= %%PYTHON_SITELIBDIR%%/augeas.py \
 	%%PYTHON_SITELIBDIR%%/augeas.pyc \
 	%%PYTHON_SITELIBDIR%%/augeas.pyo
 
+NO_STAGE=	yes
+
 .include <bsd.port.mk>

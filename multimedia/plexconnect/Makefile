@@ -24,6 +24,8 @@ SUB_LIST+=	PYTHON_CMD=${PYTHON_CMD}
 USERS=	plexconnect
 GROUPS=	plexconnect
 
+NO_STAGE=	yes
+
 post-patch:
 	@${REINPLACE_CMD} -e '1s|#!/usr/bin/env python|#!${PYTHON_CMD}|' ${WRKSRC}/*.py
 

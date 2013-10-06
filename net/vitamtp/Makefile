@@ -27,6 +27,8 @@ CFLAGS+=	"-I${LOCALBASE}/include"
 LIBS+=	"-L${LOCALBASE}/lib"
 CONFIGURE_ENV+=	LIBUSB_CFLAGS=" -I/usr/include" LIBUSB_LIBS="-lusb"
 
+NO_STAGE=	yes
+
 post-patch:
 	@${TOUCH} ${WRKSRC}/config.rpath
 	@${REINPLACE_CMD} -e 's|libusb-1.0/libusb.h|libusb.h|' ${WRKSRC}/src/usb.c

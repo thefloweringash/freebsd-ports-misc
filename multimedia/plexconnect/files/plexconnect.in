@@ -29,6 +29,9 @@ plexconnect_precmd() {
 	if [ ! -f "${plexconnect_logfile}" ]; then
 		install -m 644 -o ${plexconnect_user} /dev/null "${plexconnect_logfile}"
 	fi
+	if [ ! -f "%%ETCDIR%%/ATVSettings.cfg" ]; then
+		install -m 644 -o ${plexconnect_user} /dev/null "%%ETCDIR%%/ATVSettings.cfg"
+	fi
 }
 
 load_rc_config $name

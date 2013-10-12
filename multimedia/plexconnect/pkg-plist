@@ -1,95 +1,128 @@
 @unexec if cmp -s %D/%%ETCDIR%%/Settings.cfg.sample %D/%%ETCDIR%%/Settings.cfg; then rm -f %D/%%ETCDIR%%/Settings.cfg; fi
 %%ETCDIR%%/Settings.cfg.sample
 @exec if [ ! -f %D/%%ETCDIR%%/Settings.cfg ]; then cp -p %D/%F %B/Settings.cfg; fi
-@unexec if cmp -s %D/%%ETCDIR%%/ATVSettings.cfg.sample %D/%%ETCDIR%%/ATVSettings.cfg; then rm -f %D/%%ETCDIR%%/ATVSettings.cfg; fi
-%%ETCDIR%%/ATVSettings.cfg.sample
-@exec if [ ! -f %D/%%ETCDIR%%/ATVSettings.cfg ]; then cp -p %D/%F %B/ATVSettings.cfg; fi
-@dirrmtry %%ETCDIR%%
+etc/rc.d/plexconnect
+%%PORTDOCS%%%%DOCSDIR%%/README.md
+%%DATADIR%%/ATVSettings.cfg
 %%DATADIR%%/ATVSettings.py
-%%DATADIR%%/WebServer.py
 %%DATADIR%%/DNSServer.py
-%%DATADIR%%/PlexGDM.py
-%%DATADIR%%/Settings.py
-%%DATADIR%%/XMLConverter.py
-%%DATADIR%%/PlexConnect.py
 %%DATADIR%%/Debug.py
 %%DATADIR%%/Localize.py
-%%DATADIR%%/Settings.cfg
-%%DATADIR%%/ATVSettings.cfg
 %%DATADIR%%/PlexConnect.log
-%%DATADIR%%/assets/js/selectAudioAndSubs.js
-%%DATADIR%%/assets/js/utils.js
-%%DATADIR%%/assets/js/updateXML.js
-%%DATADIR%%/assets/js/photo.js
+%%DATADIR%%/PlexConnect.py
+%%DATADIR%%/PlexGDM.py
+%%DATADIR%%/Settings.cfg
+%%DATADIR%%/Settings.py
+%%DATADIR%%/WebServer.py
+%%DATADIR%%/XMLConverter.py
+%%DATADIR%%/assets/certificates/certificates.txt
 %%DATADIR%%/assets/js/application.js
-%%DATADIR%%/assets/js/settings.js
+%%DATADIR%%/assets/js/photo.js
 %%DATADIR%%/assets/js/scrobble.js
-%%DATADIR%%/assets/thumbnails/PlexConnectLogo.jpg
-%%DATADIR%%/assets/thumbnails/Folder.png
-%%DATADIR%%/assets/locales/nb/plexconnect.po
-%%DATADIR%%/assets/locales/nb/plexconnect.mo
-%%DATADIR%%/assets/locales/zh_TW/plexconnect.po
-%%DATADIR%%/assets/locales/zh_TW/plexconnect.mo
-%%DATADIR%%/assets/locales/plexconnect.pot
+%%DATADIR%%/assets/js/selectAudioAndSubs.js
+%%DATADIR%%/assets/js/settings.js
+%%DATADIR%%/assets/js/updateXML.js
+%%DATADIR%%/assets/js/utils.js
+%%DATADIR%%/assets/locales/da/plexconnect.mo
+%%DATADIR%%/assets/locales/da/plexconnect.po
+%%DATADIR%%/assets/locales/de/plexconnect.mo
+%%DATADIR%%/assets/locales/de/plexconnect.po
+%%DATADIR%%/assets/locales/el/plexconnect.mo
+%%DATADIR%%/assets/locales/el/plexconnect.po
 %%DATADIR%%/assets/locales/en/plexconnect.mo
 %%DATADIR%%/assets/locales/en/plexconnect.po
-%%DATADIR%%/assets/locales/de/plexconnect.po
-%%DATADIR%%/assets/locales/de/plexconnect.mo
+%%DATADIR%%/assets/locales/es/plexconnect.mo
+%%DATADIR%%/assets/locales/es/plexconnect.po
+%%DATADIR%%/assets/locales/fr/plexconnect.mo
+%%DATADIR%%/assets/locales/fr/plexconnect.po
+%%DATADIR%%/assets/locales/it/plexconnect.mo
+%%DATADIR%%/assets/locales/it/plexconnect.po
 %%DATADIR%%/assets/locales/locales.txt
-%%DATADIR%%/assets/templates/Search_Results.xml
-%%DATADIR%%/assets/templates/Season_Coverflow.xml
+%%DATADIR%%/assets/locales/nb/plexconnect.mo
+%%DATADIR%%/assets/locales/nb/plexconnect.po
+%%DATADIR%%/assets/locales/nl/plexconnect.mo
+%%DATADIR%%/assets/locales/nl/plexconnect.po
+%%DATADIR%%/assets/locales/pl/plexconnect.mo
+%%DATADIR%%/assets/locales/pl/plexconnect.po
+%%DATADIR%%/assets/locales/plexconnect.pot
+%%DATADIR%%/assets/locales/pt/plexconnect.mo
+%%DATADIR%%/assets/locales/pt/plexconnect.po
+%%DATADIR%%/assets/locales/ru/plexconnect.mo
+%%DATADIR%%/assets/locales/ru/plexconnect.po
+%%DATADIR%%/assets/locales/sv/plexconnect.mo
+%%DATADIR%%/assets/locales/sv/plexconnect.po
+%%DATADIR%%/assets/locales/uk/plexconnect.mo
+%%DATADIR%%/assets/locales/uk/plexconnect.po
+%%DATADIR%%/assets/locales/zh_TW/plexconnect.mo
+%%DATADIR%%/assets/locales/zh_TW/plexconnect.po
+%%DATADIR%%/assets/templates/ByFolder.xml
+%%DATADIR%%/assets/templates/ChannelPrePlay.xml
+%%DATADIR%%/assets/templates/Channels.xml
+%%DATADIR%%/assets/templates/ChannelsVideo.xml
 %%DATADIR%%/assets/templates/Directory.xml
-%%DATADIR%%/assets/templates/SectionPreview-photo.xml
-%%DATADIR%%/assets/templates/SectionPreview-movie.xml
-%%DATADIR%%/assets/templates/SectionPreview-show.xml
+%%DATADIR%%/assets/templates/DirectoryWithPreview.xml
+%%DATADIR%%/assets/templates/DirectoryWithPreviewActors.xml
+%%DATADIR%%/assets/templates/Episode.xml
+%%DATADIR%%/assets/templates/EpisodePrePlay.xml
+%%DATADIR%%/assets/templates/MoviePrePlay.xml
+%%DATADIR%%/assets/templates/MoviePreview.xml
+%%DATADIR%%/assets/templates/MovieSecondary.xml
+%%DATADIR%%/assets/templates/MovieSection.xml
+%%DATADIR%%/assets/templates/MovieSectionTopLevel.xml
 %%DATADIR%%/assets/templates/Movie_Grid.xml
 %%DATADIR%%/assets/templates/Movie_List.xml
-%%DATADIR%%/assets/templates/TVSection.xml
+%%DATADIR%%/assets/templates/Music_Track.xml
+%%DATADIR%%/assets/templates/Photo.xml
+%%DATADIR%%/assets/templates/Photo_Browser.xml
+%%DATADIR%%/assets/templates/PlayMusic.xml
+%%DATADIR%%/assets/templates/PlayVideo.xml
+%%DATADIR%%/assets/templates/PlexConnect.xml
+%%DATADIR%%/assets/templates/RefreshLibrary.xml
+%%DATADIR%%/assets/templates/SearchForm.xml
+%%DATADIR%%/assets/templates/Search_Results.xml
+%%DATADIR%%/assets/templates/Season.xml
+%%DATADIR%%/assets/templates/Season_Coverflow.xml
 %%DATADIR%%/assets/templates/Season_List.xml
-%%DATADIR%%/assets/templates/MovieSection.xml
+%%DATADIR%%/assets/templates/SectionPreview-artist.xml
+%%DATADIR%%/assets/templates/SectionPreview-movie.xml
+%%DATADIR%%/assets/templates/SectionPreview-photo.xml
+%%DATADIR%%/assets/templates/SectionPreview-show.xml
+%%DATADIR%%/assets/templates/SectionPreview.xml
+%%DATADIR%%/assets/templates/Settings.xml
+%%DATADIR%%/assets/templates/Settings_Movies.xml
+%%DATADIR%%/assets/templates/Settings_TVShows.xml
+%%DATADIR%%/assets/templates/Settings_VideoOSD.xml
+%%DATADIR%%/assets/templates/Show_Bookcase.xml
 %%DATADIR%%/assets/templates/Show_Grid.xml
 %%DATADIR%%/assets/templates/Show_List.xml
-%%DATADIR%%/assets/templates/Photo.xml
-%%DATADIR%%/assets/templates/ByFolder.xml
-%%DATADIR%%/assets/templates/VersionError.xml
-%%DATADIR%%/assets/templates/MovieSectionTopLevel.xml
-%%DATADIR%%/assets/templates/SearchForm.xml
 %%DATADIR%%/assets/templates/TVSecondary.xml
-%%DATADIR%%/assets/templates/SectionPreview.xml
-%%DATADIR%%/assets/templates/Show_Bookcase.xml
-%%DATADIR%%/assets/templates/Settings.xml
-%%DATADIR%%/assets/templates/DirectoryWithPreview.xml
+%%DATADIR%%/assets/templates/TVSection.xml
 %%DATADIR%%/assets/templates/TVSectionTopLevel.xml
-%%DATADIR%%/assets/templates/DirectoryWithPreviewActors.xml
-%%DATADIR%%/assets/templates/Season.xml
-%%DATADIR%%/assets/templates/ChannelsVideo.xml
-%%DATADIR%%/assets/templates/MovieSecondary.xml
-%%DATADIR%%/assets/templates/Settings_TVShows.xml
-%%DATADIR%%/assets/templates/Settings_Movies.xml
-%%DATADIR%%/assets/templates/SectionPreview-artist.xml
-%%DATADIR%%/assets/templates/Music_Track.xml
-%%DATADIR%%/assets/templates/EpisodePrePlay.xml
-%%DATADIR%%/assets/templates/Channels.xml
-%%DATADIR%%/assets/templates/PlexConnect.xml
-%%DATADIR%%/assets/templates/PlayMusic.xml
-%%DATADIR%%/assets/templates/Settings_VideoOSD.xml
-%%DATADIR%%/assets/templates/Episode.xml
 %%DATADIR%%/assets/templates/TV_OnDeck.xml
-%%DATADIR%%/assets/templates/Photo_Browser.xml
-%%DATADIR%%/assets/templates/MoviePreview.xml
-%%DATADIR%%/assets/templates/ChannelPrePlay.xml
-%%DATADIR%%/assets/templates/MoviePrePlay.xml
-%%DATADIR%%/assets/templates/PlayVideo.xml
-%%DATADIR%%/assets/templates/RefreshLibrary.xml
-%%DATADIR%%/assets/certificates/certificates.txt
-@dirrm %%DATADIR%%/assets/js
+%%DATADIR%%/assets/templates/VersionError.xml
+%%DATADIR%%/assets/thumbnails/Folder.png
+%%DATADIR%%/assets/thumbnails/PlexConnectLogo.jpg
 @dirrm %%DATADIR%%/assets/thumbnails
-@dirrm %%DATADIR%%/assets/locales/nb
-@dirrm %%DATADIR%%/assets/locales/zh_TW
-@dirrm %%DATADIR%%/assets/locales/en
-@dirrm %%DATADIR%%/assets/locales/de
-@dirrm %%DATADIR%%/assets/locales
 @dirrm %%DATADIR%%/assets/templates
+@dirrm %%DATADIR%%/assets/locales/zh_TW
+@dirrm %%DATADIR%%/assets/locales/uk
+@dirrm %%DATADIR%%/assets/locales/sv
+@dirrm %%DATADIR%%/assets/locales/ru
+@dirrm %%DATADIR%%/assets/locales/pt
+@dirrm %%DATADIR%%/assets/locales/pl
+@dirrm %%DATADIR%%/assets/locales/nl
+@dirrm %%DATADIR%%/assets/locales/nb
+@dirrm %%DATADIR%%/assets/locales/it
+@dirrm %%DATADIR%%/assets/locales/fr
+@dirrm %%DATADIR%%/assets/locales/es
+@dirrm %%DATADIR%%/assets/locales/en
+@dirrm %%DATADIR%%/assets/locales/el
+@dirrm %%DATADIR%%/assets/locales/de
+@dirrm %%DATADIR%%/assets/locales/da
+@dirrm %%DATADIR%%/assets/locales
+@dirrm %%DATADIR%%/assets/js
 @dirrm %%DATADIR%%/assets/certificates
 @dirrm %%DATADIR%%/assets
 @dirrm %%DATADIR%%
+%%PORTDOCS%%@dirrm %%DOCSDIR%%
+@dirrmtry etc/plexconnect

@@ -1,0 +1,7 @@
+bin/camget
+bin/camlistored
+bin/camput
+bin/camtool
+bin/devcam
+%%PORTDOCS%%%%DOCSDIR%%/README
+%%PORTDOCS%%@dirrm %%DOCSDIR%%

@@ -4,8 +4,9 @@ bin/xpra_launcher
 @unexec if cmp -s %D/%%ETCDIR%%/xpra.conf.sample %D/%%ETCDIR%%/xpra.conf; then rm -f %D/%%ETCDIR%%/xpra.conf; fi
 %%ETCDIR%%/xpra.conf.sample
 @exec if [ ! -f %D/%%ETCDIR%%/xpra.conf ]; then cp -p %D/%F %B/xpra.conf; fi
-%%ETCDIR%%/xorg.conf
-@dirrmtry %%ETCDIR%%
+@unexec if cmp -s %D/%%ETCDIR%%/xorg.conf.sample %D/%%ETCDIR%%/xorg.conf; then rm -f %D/%%ETCDIR%%/xorg.conf; fi
+%%ETCDIR%%/xorg.conf.sample
+@exec if [ ! -f %D/%%ETCDIR%%/xorg.conf ]; then cp -p %D/%F %B/xorg.conf; fi
 %%PYTHON_SITELIBDIR%%/xpra/__init__.py
 %%PYTHON_SITELIBDIR%%/xpra/__init__.pyc
 %%PYTHON_SITELIBDIR%%/xpra/__init__.pyo
@@ -555,39 +556,40 @@ bin/xpra_launcher
 %%PYTHON_SITELIBDIR%%/xpra/x11/xsettings_prop.py
 %%PYTHON_SITELIBDIR%%/xpra/x11/xsettings_prop.pyc
 %%PYTHON_SITELIBDIR%%/xpra/x11/xsettings_prop.pyo
+man/man1/xpra.1.gz
+man/man1/xpra_launcher.1.gz
 share/applications/xpra.desktop
 share/applications/xpra_launcher.desktop
 share/icons/xpra.png
-share/xpra/COPYING
-share/xpra/README
-share/xpra/icons/browse.png
-share/xpra/icons/clipboard.png
-share/xpra/icons/close.png
-share/xpra/icons/compressed.png
-share/xpra/icons/connect.png
-share/xpra/icons/encoding.png
-share/xpra/icons/features.png
-share/xpra/icons/information.png
-share/xpra/icons/keyboard.png
-share/xpra/icons/microphone.png
-share/xpra/icons/opengl.png
-share/xpra/icons/package.png
-share/xpra/icons/quit.png
-share/xpra/icons/raise.png
-share/xpra/icons/retry.png
-share/xpra/icons/slider.png
-share/xpra/icons/speaker.png
-share/xpra/icons/speed.png
-share/xpra/icons/statistics.png
-share/xpra/icons/ticked-small.png
-share/xpra/icons/unticked-small.png
-share/xpra/icons/xpra.png
-share/xpra/webm/LICENSE
-@dirrm share/xpra/webm
-@dirrm share/xpra/icons
-@dirrm share/xpra
+%%DATADIR%%/COPYING
+%%DATADIR%%/README
+%%DATADIR%%/icons/browse.png
+%%DATADIR%%/icons/clipboard.png
+%%DATADIR%%/icons/close.png
+%%DATADIR%%/icons/compressed.png
+%%DATADIR%%/icons/connect.png
+%%DATADIR%%/icons/encoding.png
+%%DATADIR%%/icons/features.png
+%%DATADIR%%/icons/information.png
+%%DATADIR%%/icons/keyboard.png
+%%DATADIR%%/icons/microphone.png
+%%DATADIR%%/icons/opengl.png
+%%DATADIR%%/icons/package.png
+%%DATADIR%%/icons/quit.png
+%%DATADIR%%/icons/raise.png
+%%DATADIR%%/icons/retry.png
+%%DATADIR%%/icons/slider.png
+%%DATADIR%%/icons/speaker.png
+%%DATADIR%%/icons/speed.png
+%%DATADIR%%/icons/statistics.png
+%%DATADIR%%/icons/ticked-small.png
+%%DATADIR%%/icons/unticked-small.png
+%%DATADIR%%/icons/xpra.png
+%%DATADIR%%/webm/LICENSE
+@dirrm %%DATADIR%%/webm
+@dirrm %%DATADIR%%/icons
+@dirrm %%DATADIR%%
 @dirrmtry share/icons
-@dirrmtry share/applications
 @dirrm %%PYTHON_SITELIBDIR%%/xpra/x11/gtk_x11
 @dirrm %%PYTHON_SITELIBDIR%%/xpra/x11/bindings
 @dirrm %%PYTHON_SITELIBDIR%%/xpra/x11
@@ -618,3 +620,4 @@ share/xpra/webm/LICENSE
 @dirrm %%PYTHON_SITELIBDIR%%/xpra/client/gl
 @dirrm %%PYTHON_SITELIBDIR%%/xpra/client
 @dirrm %%PYTHON_SITELIBDIR%%/xpra
+@dirrmtry etc/xpra

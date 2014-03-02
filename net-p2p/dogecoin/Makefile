@@ -2,8 +2,7 @@
 # $FreeBSD: head/net-p2p/dogecoin/Makefile 343949 2014-02-12 18:41:27Z swills $
 
 PORTNAME=	dogecoin
-PORTVERSION=	1.5.0
-PORTREVISION=	2
+PORTVERSION=	1.5.2
 CATEGORIES=	net-p2p finance
 
 MAINTAINER=	swills@FreeBSD.org
@@ -22,8 +21,8 @@ QRCODES_DESC=	Build with QR code display
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	${PORTNAME}
-GH_COMMIT=	be94b62
-GH_TAGNAME=	v${PORTVERSION}
+GH_COMMIT=	6fa6c91
+GH_TAGNAME=	${PORTVERSION}
 
 USES=		gmake compiler:c++11-lib
 USE_OPENSSL=	yes

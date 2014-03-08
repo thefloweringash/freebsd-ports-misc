@@ -1,0 +1,190 @@
+#!/bin/sh
+# PROVIDE: minecraft
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="minecraft"
+rcvar="minecraft_enable"
+
+load_rc_config $name
+
+minecraft_enable=${minecraft_enable:-"NO"}
+
+minecraft_user=${minecraft_user:-"minecraft"}
+minecraft_base_dir=${minecraft_base_dir:-"/opt/minecraft"}
+minecraft_data_dir=${minecraft_data_dir:-"${minecraft_base_dir}/data"}
+minecraft_defaults_dir=${minecraft_defaults_dir:-"${minecraft_base_dir}/defaults"}
+minecraft_lib_dir=${minecraft_lib_dir:-"${minecraft_base_dir}/lib"}
+minecraft_jvm=${minecraft_jvm:-"%%JAVA%%"}
+minecraft_jvm_options=${minecraft_jvm_options:-"-Xmx1g"}
+minecraft_jar=${minecraft_jar:-"${minecraft_lib_dir}/minecraft_server.jar"}
+
+tmux_path="%%PREFIX%%/bin/tmux"
+tmux="minecraft_do_tmux"
+
+minecraft_do_tmux() {
+	su -m ${_user} -c "${tmux_path} $*"
+}
+minecraft_has_session() {
+	${tmux} has-session -t minecraft 2>/dev/null
+}
+
+minecraft_has_window() {
+	if minecraft_has_session; then
+		${tmux} list-windows -t minecraft -F "'#{window_name}'" | \
+			grep -q "$m"
+	else
+		false
+	fi
+}
+
+minecraft_stuff() {
+	if minecraft_has_window; then
+		${tmux} send-keys -t minecraft:${m} "$1" "C-j"
+	else
+		false
+	fi
+}
+
+minecraft_status_one() {
+	if minecraft_has_window; then
+		echo "running"
+	else
+		echo "stopped"
+	fi
+}
+minecraft_status_cmd() {
+	echo "Minecraft status"
+	minecraft_for_each_profile minecraft_status_one
+}
+
+minecraft_start_one() {
+	start="'${_jvm} ${_jvm_options} -jar ${_jar}'"
+	if minecraft_has_window; then
+		echo "already running"
+	elif minecraft_has_session; then
+		${tmux} new-window -t minecraft -n ${m} -c ${_data_dir} ${start}
+		echo "started"
+	else
+		${tmux} new-session -d -s minecraft -n ${m} -c ${_data_dir} ${start}
+		echo "started"
+	fi
+}
+minecraft_start_cmd() {
+	echo "Starting minecraft"
+	minecraft_for_each_profile minecraft_start_one
+}
+
+minecraft_stop_one() {
+	if minecraft_has_window $1; then
+		minecraft_stuff "stop"
+		while minecraft_has_window; do
+			sleep 0.5;
+		done
+		echo 'stopped'
+	else
+		echo 'not running'
+	fi
+}
+minecraft_stop_cmd() {
+	echo "Stopping minecraft"
+	minecraft_for_each_profile minecraft_stop_one
+}
+
+minecraft_provision_one() {
+	mkdir -p ${_data_dir}
+	find ${_defaults_dir} -type f | \
+		while read filepath; do
+		file=`basename ${filepath}`
+		if [ ! -f ${_data_dir}/${file} ]; then
+			cp -a ${filepath} ${_data_dir}
+		fi
+	done
+	chown -R ${_user} ${_data_dir}
+	echo "Done"
+}
+minecraft_provision_cmd() {
+	minecraft_for_each_profile minecraft_provision_one
+}
+
+minecraft_print_console_command() {
+	if minecraft_has_window; then
+		tail -n 0 -f ${_data_dir}/logs/latest.log | lam -s "    " - & TAIL=`jobs -p`
+		minecraft_stuff $1
+		sleep 1
+		kill "$TAIL"
+	else
+		echo "    Not running"
+	fi
+}
+
+minecraft_list_cmd() {
+	for m in ${minecraft_profiles}; do
+		eval `select_profile ${m}`
+		echo $m
+		minecraft_print_console_command "list"
+	done
+}
+
+minecraft_count_profiles() {
+	x=0
+	for m in ${minecraft_profiles}; do
+		x=`expr $x + 1`
+	done
+	echo $x
+}
+minecraft_console_cmd() {
+	if [ `minecraft_count_profiles` -ne 1 ]; then
+		echo "A single profile must be seleted to attach to"
+	else
+		eval `select_profile ${minecraft_profiles}`
+		${tmux} attach -t minecraft:${m}
+	fi
+}
+
+minecraft_for_each_profile() {
+	for m in ${minecraft_profiles}; do
+		eval `select_profile ${m}`
+		printf "  %-10s : " $m
+		printf " %s\n" "`$1`"
+	done
+}
+
+
+copy_var() {
+	read="\${minecraft_${1}_${2}:-\${minecraft_${2}}}"
+	echo "_${2}=\"${read}\""
+}
+select_profile() {
+	m=$1
+cat <<EOF
+m=$m
+`copy_var $m user`
+`copy_var $m base_dir`
+`copy_var $m defaults_dir`
+`copy_var $m lib_dir`
+`copy_var $m jvm`
+`copy_var $m jvm_options`
+`copy_var $m jar`
+_data_dir=\${minecraft_${m}_data_dir:-${minecraft_data_dir}/${m}}
+EOF
+}
+
+status_cmd="minecraft_status_cmd"
+start_cmd="minecraft_start_cmd"
+stop_cmd="minecraft_stop_cmd"
+provision_cmd="minecraft_provision_cmd"
+list_cmd="minecraft_list_cmd"
+console_cmd="minecraft_console_cmd"
+
+required_files="${minecraft_jar}"
+extra_commands="status provision list console"
+
+action="$1"; shift
+if [ -n "$*" ]; then
+	minecraft_profiles=$@
+fi
+
+run_rc_command "$action"

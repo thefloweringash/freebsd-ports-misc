@@ -61,7 +61,7 @@ minecraft_status_cmd() {
 }
 
 minecraft_start_one() {
-	start="'${_jvm} ${_jvm_options} -jar ${_jar}'"
+	start="'exec ${_jvm} ${_jvm_options} -jar ${_jar}'"
 	if minecraft_has_window; then
 		echo "already running"
 	elif minecraft_has_session; then

@@ -34,7 +34,7 @@ minecraft_has_session() {
 minecraft_has_window() {
 	if minecraft_has_session; then
 		${tmux} list-windows -t minecraft -F "'#{window_name}'" | \
-			grep -q "$m"
+			grep -q "^${m}$"
 	else
 		false
 	fi

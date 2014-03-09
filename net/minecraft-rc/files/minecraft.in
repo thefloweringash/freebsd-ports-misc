@@ -8,8 +8,6 @@
 name="minecraft"
 rcvar="minecraft_enable"
 
-load_rc_config $name
-
 minecraft_enable=${minecraft_enable:-"NO"}
 
 minecraft_user=${minecraft_user:-"minecraft"}
@@ -20,6 +18,8 @@ minecraft_lib_dir=${minecraft_lib_dir:-"${minecraft_base_dir}/lib"}
 minecraft_jvm=${minecraft_jvm:-"%%JAVA%%"}
 minecraft_jvm_options=${minecraft_jvm_options:-"-Xmx1g"}
 minecraft_jar=${minecraft_jar:-"${minecraft_lib_dir}/minecraft_server.jar"}
+
+load_rc_config $name
 
 tmux_path="%%PREFIX%%/bin/tmux"
 tmux="minecraft_do_tmux"

@@ -61,15 +61,25 @@ minecraft_status_cmd() {
 }
 
 minecraft_start_one() {
-	start="'exec ${_jvm} ${_jvm_options} -jar ${_jar}'"
 	if minecraft_has_window; then
 		echo "already running"
-	elif minecraft_has_session; then
-		${tmux} new-window -t minecraft -n ${m} -c ${_data_dir} ${start}
-		echo "started"
 	else
-		${tmux} new-session -d -s minecraft -n ${m} -c ${_data_dir} ${start}
-		echo "started"
+		if [ ! -r "${_jar}" ]; then
+			warn "${_jar} is not readable."
+			return 1
+		fi
+		if [ ! -d "${_data_dir}/." ]; then
+			warn "${_data_dir} is not a directory."
+			return 1
+		fi
+		start="'exec ${_jvm} ${_jvm_options} -jar ${_jar}'"
+		if minecraft_has_session; then
+			${tmux} new-window -t minecraft -n ${m} -c ${_data_dir} ${start}
+			echo "started"
+		else
+			${tmux} new-session -d -s minecraft -n ${m} -c ${_data_dir} ${start}
+			echo "started"
+		fi
 	fi
 }
 minecraft_start_cmd() {
@@ -78,12 +88,20 @@ minecraft_start_cmd() {
 }
 
 minecraft_stop_one() {
-	if minecraft_has_window $1; then
+	if minecraft_has_window; then
 		minecraft_stuff "stop"
-		while minecraft_has_window; do
-			sleep 0.5;
+		attempt=0
+		while [ "$attempt" -lt 20 ]; do
+			if minecraft_has_window; then
+				sleep 0.5;
+				attempt=`expr $attempt + 1`
+			else
+				echo 'stopped'
+				return
+			fi
 		done
-		echo 'stopped'
+		echo 'failed'
+		return 1
 	else
 		echo 'not running'
 	fi
@@ -94,6 +112,10 @@ minecraft_stop_cmd() {
 }
 
 minecraft_provision_one() {
+	if [ ! -d "${_defaults_dir}/." ]; then
+		warn "${_defaults_dir} is not a directory."
+		return 1
+	fi
 	mkdir -p ${_data_dir}
 	find ${_defaults_dir} -type f | \
 		while read filepath; do
@@ -179,7 +201,6 @@ provision_cmd="minecraft_provision_cmd"
 list_cmd="minecraft_list_cmd"
 console_cmd="minecraft_console_cmd"
 
-required_files="${minecraft_jar}"
 extra_commands="status provision list console"
 
 action="$1"; shift

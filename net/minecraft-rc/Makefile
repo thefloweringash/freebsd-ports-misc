@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	minecraft-rc
-PORTVERSION=	0.0.3
+PORTVERSION=	0.0.4
 CATEGORIES=	net games java
 DISTFILES=	# none
 

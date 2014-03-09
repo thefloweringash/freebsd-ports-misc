@@ -116,15 +116,21 @@ minecraft_provision_one() {
 		warn "${_defaults_dir} is not a directory."
 		return 1
 	fi
-	mkdir -p ${_data_dir}
+	install -d -o ${_user} ${_data_dir}
 	find ${_defaults_dir} -type f | \
 		while read filepath; do
 		file=`basename ${filepath}`
-		if [ ! -f ${_data_dir}/${file} ]; then
-			cp -a ${filepath} ${_data_dir}
+		if [ "${file}" == defaults.mtree ]; then
+			continue
+		fi
+		if [ ! -f "${_data_dir}/${file}" ]; then
+			install -m 0644 -o ${_user} ${filepath} ${_data_dir}
 		fi
 	done
-	chown -R ${_user} ${_data_dir}
+	if [ -r "${_defaults_dir}/defaults.mtree" ]; then
+		mtree -q -e -U -p "${_data_dir}" -f "${_defaults_dir}/defaults.mtree" \
+			> /dev/null 2>&1 # mtree is exceptionally noisy
+	fi
 	echo "Done"
 }
 minecraft_provision_cmd() {

@@ -8,8 +8,6 @@
 name="minecraft"
 rcvar="minecraft_enable"
 
-load_rc_config $name
-
 minecraft_enable=${minecraft_enable:-"NO"}
 
 minecraft_user=${minecraft_user:-"minecraft"}
@@ -20,6 +18,8 @@ minecraft_lib_dir=${minecraft_lib_dir:-"${minecraft_base_dir}/lib"}
 minecraft_jvm=${minecraft_jvm:-"%%JAVA%%"}
 minecraft_jvm_options=${minecraft_jvm_options:-"-Xmx1g"}
 minecraft_jar=${minecraft_jar:-"${minecraft_lib_dir}/minecraft_server.jar"}
+
+load_rc_config $name
 
 tmux_path="%%PREFIX%%/bin/tmux"
 tmux="minecraft_do_tmux"
@@ -61,15 +61,25 @@ minecraft_status_cmd() {
 }
 
 minecraft_start_one() {
-	start="'exec ${_jvm} ${_jvm_options} -jar ${_jar}'"
 	if minecraft_has_window; then
 		echo "already running"
-	elif minecraft_has_session; then
-		${tmux} new-window -t minecraft -n ${m} -c ${_data_dir} ${start}
-		echo "started"
 	else
-		${tmux} new-session -d -s minecraft -n ${m} -c ${_data_dir} ${start}
-		echo "started"
+		if [ ! -r "${_jar}" ]; then
+			warn "${_jar} is not readable."
+			return 1
+		fi
+		if [ ! -d "${_data_dir}/." ]; then
+			warn "${_data_dir} is not a directory."
+			return 1
+		fi
+		start="'exec ${_jvm} ${_jvm_options} -jar ${_jar}'"
+		if minecraft_has_session; then
+			${tmux} new-window -t minecraft -n ${m} -c ${_data_dir} ${start}
+			echo "started"
+		else
+			${tmux} new-session -d -s minecraft -n ${m} -c ${_data_dir} ${start}
+			echo "started"
+		fi
 	fi
 }
 minecraft_start_cmd() {
@@ -78,12 +88,20 @@ minecraft_start_cmd() {
 }
 
 minecraft_stop_one() {
-	if minecraft_has_window $1; then
+	if minecraft_has_window; then
 		minecraft_stuff "stop"
-		while minecraft_has_window; do
-			sleep 0.5;
+		attempt=0
+		while [ "$attempt" -lt 20 ]; do
+			if minecraft_has_window; then
+				sleep 0.5;
+				attempt=`expr $attempt + 1`
+			else
+				echo 'stopped'
+				return
+			fi
 		done
-		echo 'stopped'
+		echo 'failed'
+		return 1
 	else
 		echo 'not running'
 	fi
@@ -94,15 +112,25 @@ minecraft_stop_cmd() {
 }
 
 minecraft_provision_one() {
-	mkdir -p ${_data_dir}
+	if [ ! -d "${_defaults_dir}/." ]; then
+		warn "${_defaults_dir} is not a directory."
+		return 1
+	fi
+	install -d -o ${_user} ${_data_dir}
 	find ${_defaults_dir} -type f | \
 		while read filepath; do
 		file=`basename ${filepath}`
-		if [ ! -f ${_data_dir}/${file} ]; then
-			cp -a ${filepath} ${_data_dir}
+		if [ "${file}" == defaults.mtree ]; then
+			continue
+		fi
+		if [ ! -f "${_data_dir}/${file}" ]; then
+			install -m 0644 -o ${_user} ${filepath} ${_data_dir}
 		fi
 	done
-	chown -R ${_user} ${_data_dir}
+	if [ -r "${_defaults_dir}/defaults.mtree" ]; then
+		mtree -q -e -U -p "${_data_dir}" -f "${_defaults_dir}/defaults.mtree" \
+			> /dev/null 2>&1 # mtree is exceptionally noisy
+	fi
 	echo "Done"
 }
 minecraft_provision_cmd() {
@@ -179,7 +207,6 @@ provision_cmd="minecraft_provision_cmd"
 list_cmd="minecraft_list_cmd"
 console_cmd="minecraft_console_cmd"
 
-required_files="${minecraft_jar}"
 extra_commands="status provision list console"
 
 action="$1"; shift

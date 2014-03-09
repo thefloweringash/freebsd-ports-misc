@@ -1,0 +1,140 @@
+.Dd March 9, 2014
+.Dt minecraft 8
+.Os
+.Sh NAME
+.Nm minecraft
+.Nd rc script for Minecraft servers
+.Sh SYNOPSIS
+.Nm service minecraft
+.Ar start
+.Op profiles...
+.Nm service minecraft
+.Ar stop
+.Op profiles...
+.Nm service minecraft
+.Ar status
+.Op profiles...
+.Nm service minecraft
+.Ar restart
+.Op profiles...
+.Nm service minecraft
+.Ar list
+.Op profiles...
+.Nm service minecraft
+.Ar provision
+.Op profiles...
+.Sh DESCRIPTION
+.Nm
+is an rc script and package for running Minecraft servers on
+FreeBSD. In an attempt to be flexible, this script does not provide
+the Minecraft jar; selecting and installing the Minecraft software is
+the responsibility of the system administrator. This script supports
+multiple servers as profiles, quick provisioning, and server
+status. Minecraft servers are run as windows in a
+.Xr tmux 1
+session named
+.Dq minecraft\& .
+.Pp
+Profiles are configured in
+.Xr rc.conf 5\& . Each variable can be specified globally as
+.Ql minecraft_VAR
+or per profile as
+.Ql minecraft_PROFILE_VAR\& .
+.Pp
+The following options are supported:
+.Bl -hang -offset indent -width "minecraft_defaults_dir"
+.It Em minecraft_user
+The user to run the tmux and java processes as.
+.Bq Dq minecraft
+.It Em minecraft_base_dir
+A directory used as the default prefix for
+.Em minecraft_data_dir ,
+.Em minecraft_defaults_dir ,
+and
+.Em minecraft_lib_dir
+.Bq Dq /opt/minecraft
+.It Em minecraft_data_dir
+Working directory for the Minecraft server. Note that when specified globally the profile name will be appended.
+.Bq Dq ${minecraft_base_dir}/data
+.It Em minecraft_defaults_dir
+Directory containing default data for the
+.Em provision
+command.
+.Bq Dq ${minecraft_base_dir}/defaults
+.It Em minecraft_lib_dir
+Directory containing the Minecraft jar, used as the default prefix for
+.Em minecraft_jar .
+.Bq Dq ${minecraft_base_dir}/lib
+.It Em minecraft_jvm
+Full path to the java binary to run.
+.Bq Dq %%JAVA%%
+.It Em minecraft_jvm_options
+Default options to pass to java.
+.Bq Dq "-Xmx1g"
+.It Em minecraft_jar
+Full path to the jar file to run.
+.Bq Dq ${minecraft_lib_dir}/minecraft_server.jar
+.El
+.Pp
+In addition to the standard process control commands, the following
+additional commands are supported:
+.Bl -hang -offset indent -width "provision"
+.It Em provision
+All files in
+.Em minecraft_defaults_dir
+will be copied to the root of
+.Em minecraft_data_dir
+with the exception of
+.Ql defaults.mtree .
+If present
+.Ql defaults.mtree
+will be used to update the data directory, allowing mode and user
+changes. See
+.Xr mtree 8
+for usage.
+.It Em list
+List the players connected to the server. This sends the
+.Ql list
+command, and displays the server output for the next second. This is
+sometimes useful, but unfortunately not terribly robust.
+.El
+.Pp
+A typical installation using the defaults above will look like the
+following.
+.Bd -literal -offset indent
+/opt/minecraft
+|-- data
+|   |-- profile1
+|   |   |-- server.properties
+|   |   \\-- world
+|   \\-- profile2
+|       |-- server.properties
+|       \\-- world
+|-- defaults
+|   |-- defaults.mtree
+|   |-- server.properties
+|   \\-- white-list.txt
+\\-- lib
+    |-- minecraft_server.1.7.5.jar
+    \\-- minecraft_server.jar -> minecraft_server.1.7.5.jar
+.Ed
+.Sh EXAMPLES
+Two profiles, one with a different data directory, and one with an
+explicit server version:
+.Bd -literal -offset indent
+minecraft_enable="YES"
+minecraft_profiles="shortlived fixedversion"
+minecraft_shortlived_data_dir="/tmp/minecraft-shortlived"
+minecraft_fixedversion_jar="${minecraft_lib_dir}/minecraft_server.1.7.5.jar"
+.Ed
+.Pp
+Attach to the console of a minecraft server (or servers):
+.Bd -literal -offset indent
+su minecraft -c 'tmux attach -t minecraft'
+.Ed
+.Sh SECURITY
+It is strongly recommended to make a minecraft user, and only allow it
+write access to profile directories
+.Pq Em minecraft_data_dir .
+This is the default behavior when using
+.Em provision .

@@ -48,16 +48,20 @@ minecraft_stuff() {
 	fi
 }
 
-minecraft_status_one() {
-	if minecraft_has_window; then
-		echo "running"
-	else
-		echo "stopped"
-	fi
-}
 minecraft_status_cmd() {
 	echo "Minecraft status"
-	minecraft_for_each_profile minecraft_status_one
+	rc=0
+	for m in ${minecraft_profiles}; do
+		eval `select_profile ${m}`
+		if minecraft_has_window; then
+			status="running"
+		else
+			status="stopped"
+			rc=1
+		fi
+		minecraft_print_profile_status $status
+	done
+	exit $rc
 }
 
 minecraft_start_one() {
@@ -172,11 +176,14 @@ minecraft_console_cmd() {
 	fi
 }
 
+minecraft_print_profile_status() {
+	printf "  %-10s : " $m
+	printf " %s\n" "$1"
+}
 minecraft_for_each_profile() {
 	for m in ${minecraft_profiles}; do
 		eval `select_profile ${m}`
-		printf "  %-10s : " $m
-		printf " %s\n" "`$1`"
+		minecraft_print_profile_status "`$1`"
 	done
 }
 

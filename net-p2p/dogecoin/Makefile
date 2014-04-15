@@ -2,7 +2,7 @@
 # $FreeBSD: head/net-p2p/dogecoin/Makefile 343949 2014-02-12 18:41:27Z swills $
 
 PORTNAME=	dogecoin
-PORTVERSION=	1.5.2
+PORTVERSION=	1.6
 CATEGORIES=	net-p2p finance
 
 MAINTAINER=	swills@FreeBSD.org
@@ -21,7 +21,7 @@ QRCODES_DESC=	Build with QR code display
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	${PORTNAME}
-GH_COMMIT=	6fa6c91
+GH_COMMIT=	15e78bf
 GH_TAGNAME=	${PORTVERSION}
 
 USES=		gmake compiler:c++11-lib
@@ -30,7 +30,7 @@ USE_BDB=	yes
 WANT_BDB_VER=	48
 
 CXXFLAGS+=	-I${LOCALBASE}/include -I${BDB_INCLUDE_DIR}
-CXXFLAGS+=	-L${LOCALBASE}/lib -L${BDB_LIB_DIR}
+LDFLAGS+=	-L${LOCALBASE}/lib -L${BDB_LIB_DIR}
 CXXFLAGS+=	-Wno-invalid-offsetof
 
 .include <bsd.port.options.mk>

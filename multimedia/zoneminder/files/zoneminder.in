@@ -21,7 +21,7 @@ load_rc_config "$name"
 : ${zoneminder_enable="NO"}
 
 command=%%PREFIX%%/bin/zmpkg.pl
-command_args="$1"
+command_args="\$rc_arg"
 pidfile=/var/run/zm/zm.pid
 
 start_precmd=zm_prestart
@@ -29,7 +29,7 @@ stop_cmd="zm_stop"
 status_cmd="zm_status"
 
 zm_stop() {
-  ${command} ${command_args}
+  ${command} ${rc_arg}
 }
 
 zm_status() {

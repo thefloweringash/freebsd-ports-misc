@@ -1,14 +1,15 @@
---- src/zm_logger.cpp.orig	2011-06-28 15:07:35.000000000 +0400
-+++ src/zm_logger.cpp	2012-02-03 01:42:44.626851425 +0400
-@@ -33,6 +33,7 @@
+--- src/zm_logger.cpp.orig	2011-06-28 23:07:35.000000000 +1200
++++ src/zm_logger.cpp	2014-05-27 00:42:23.057049557 +1200
+@@ -33,6 +33,8 @@
  #include <signal.h>
  #include <stdarg.h>
  #include <errno.h>
++#include <unistd.h>
 +#include <sys/thr.h>
  
  bool Logger::smInitialised = false;
  Logger *Logger::smInstance = 0;
-@@ -515,8 +516,12 @@
+@@ -515,8 +517,12 @@
      #endif
  
          pid_t tid;

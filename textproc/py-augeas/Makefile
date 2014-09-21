@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	augeas
-PORTVERSION=	0.4.1
+PORTVERSION=	0.5.0
 PORTREVISION=	1
 CATEGORIES=	textproc python
 MASTER_SITES=	https://fedorahosted.org/released/python-augeas/
@@ -11,16 +11,9 @@ DISTNAME=	python-augeas-${PORTVERSION}
 MAINTAINER=	lorne@cons.org.nz
 COMMENT=	Pure python bindings for augeas
 
-LIB_DEPENDS=	augeas:${PORTSDIR}/textproc/augeas
+LIB_DEPENDS=	libaugeas.so:${PORTSDIR}/textproc/augeas
 
-USE_PYTHON=yes
-USE_PYDISTUTILS=yes
-PYDISTUTILS_PKGNAME=python-augeas
-
-PLIST_FILES= %%PYTHON_SITELIBDIR%%/augeas.py \
-	%%PYTHON_SITELIBDIR%%/augeas.pyc \
-	%%PYTHON_SITELIBDIR%%/augeas.pyo
-
-NO_STAGE=	yes
+USES=python
+USE_PYTHON=distutils autoplist
 
 .include <bsd.port.mk>

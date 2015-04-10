@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	camlistore
-PORTVERSION=	0.7
+PORTVERSION=	0.8
 CATEGORIES=	net
 
 MAINTAINER=	lorne@cons.org.nz
@@ -10,9 +10,9 @@ COMMENT=	Camlistore is your personal storage system for life
 BUILD_DEPENDS=	go:${PORTSDIR}/lang/go
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	bradfitz
+GH_ACCOUNT=	camlistore
 GH_TAGNAME=	${PORTVERSION}
-GH_COMMIT=	931f7a7
+GH_COMMIT=	2f1a4f0
 
 USE_SQLITE=	3
 

@@ -1,0 +1,4 @@
+Tcp To Unix (sockets). A small wrapper program which switches TCP
+(actually, any AF_INET) sockets to Unix sockets transparently.
+
+WWW: https://github.com/cyphar/ttu

@@ -1,0 +1,12 @@
+--- Makefile.orig	2015-08-08 06:08:37 UTC
++++ Makefile
+@@ -23,8 +23,7 @@ CC			?= gcc
+ LNAME		?= libttu.so
+ WNAME		?= ttu
+ 
+-CLFLAGS		?= -ansi -pipe -shared -fPIC
+-LLFLAGS		?= -ldl
++CLFLAGS		?= -ansi -pipe -shared -fPIC -fvisibility=hidden
+ 
+ CWFLAGS		?= -ansi
+ LWFLAGS		?=
